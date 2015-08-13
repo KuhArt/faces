@@ -1,0 +1,155 @@
+body {
+    overflow: hidden;
+
+}
+
+/*work with procents*/
+.slider-wrap {
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    -webkit-transform: translateY(-50%);
+}
+
+.demo {
+    position: absolute;
+    top: 50%;
+    right: 20%;
+    transform: translateY(-60%);
+}
+
+.buttonDown {
+
+    position: absolute;
+    bottom: 0;
+    left: 30%;
+    width: 32px;
+    height: 32px;
+    background: url(images/controls.png) no-repeat 0 -32px;
+    transform: translateX(-50%);
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+
+}
+
+.buttonDown:hover {
+    background-position: 0 0;
+}
+
+.buttonUp {
+    right: 10px;
+    background: url(images/controls.png) no-repeat -43px -32px;
+    position: absolute;
+    top: 0;
+    left: 30%;
+    width: 32px;
+    height: 32px;
+    transform: translateX(-50%);
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+
+.buttonUp:hover {
+    background-position: -43px 0;
+}
+
+.demo.shape {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.demo div:not(.shape) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 12;
+}
+
+.endButton, .changeButton {
+    background-color: #ccc;
+    position: absolute;
+    left: 62%;
+    bottom: 17%;
+    width: 200px;
+    height: 70px;
+    border-radius: 20px;
+    visibility: hidden;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 70px;
+}
+
+.changeButton {
+    left: 40%;
+    bottom: 17%;
+}
+
+@-webkit-keyframes hvr-buzz {
+    50% {
+        -webkit-transform: translateX(3px) rotate(2deg);
+        transform: translateX(3px) rotate(2deg);
+    }
+
+    100% {
+        -webkit-transform: translateX(-3px) rotate(-2deg);
+        transform: translateX(-3px) rotate(-2deg);
+    }
+}
+
+@keyframes hvr-buzz {
+    50% {
+        -webkit-transform: translateX(3px) rotate(2deg);
+        transform: translateX(3px) rotate(2deg);
+    }
+
+    100% {
+        -webkit-transform: translateX(-3px) rotate(-2deg);
+        transform: translateX(-3px) rotate(-2deg);
+    }
+}
+
+.hvr-buzz {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.hvr-buzz:hover, .hvr-buzz:focus, .hvr-buzz:active {
+    -webkit-animation-name: hvr-buzz;
+    animation-name: hvr-buzz;
+    -webkit-animation-duration: 0.15s;
+    animation-duration: 0.15s;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+}
+
+h1 {
+    position: absolute;
+    font-family: 'Luckiest Guy', cursive;
+    color: #acacac;
+    font-size: 64px;
+    left: 20%;
+}
+
+.errorButton {
+    height: 45px;
+    width: 45px;
+    left: 80%;
+    top: 10%;
+    visibility: visible;
+}
