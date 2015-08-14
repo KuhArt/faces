@@ -1,44 +1,35 @@
 doctype html
 html
-  head
-    title
-    link(rel='stylesheet', type='text/css', href='dw-bxslider-4/src/css/jquery.bxslider.css')
-    link(rel='stylesheet', type='text/css', href='stylesheets/styles.css')
-    link(rel='stylesheet', type='text/css', href='Hover/css/hover.css')
-  body
-    // Slider
-    .slider-wrap
-      .slider8
-        .slide.eyes.visible
-          img(src='images/Eyes3.png')
-        .slide.eyes.visible
-          img(src='images/Eyes4.png')
-        .slide.noses
-          img(src='images/Nose1.png')
-        .slide.noses
-          img(src='images/Nose2.png')
-        .slide.lips
-          img(src='images/Lips3.png')
-        .slide.lips
-          img(src='images/Lips4.png')
-        .slide.hair
-          img(src='images/Hair1.png')
-        .slide.hair
-          img(src='images/Hair2.png')
-    // Demonstration
-    .demo
-      .shape
-        img(src='images/Face6.png')
-    // Buttons
-    .buttonDown
-    .buttonUp
-    .endButton.hvr-buzz
-      | END!!!
-    .changeButton
-    script(src='jquery/dist/jquery.js')
-    script(src='jquery-transform/jquery.transform2d.js')
-    script(src='jquery-color/jquery.color.js')
-    script(src='dw-bxslider-4/src/js/jquery.bxslider.js')
-    script(src='javascripts/script.js')
+    head
+        title
+        link(rel='stylesheet', type='text/css', href='dw-bxslider-4/src/css/jquery.bxslider.css')
+        link(rel='stylesheet', type='text/css', href='stylesheets/styles.css')
+        link(rel='stylesheet', type='text/css', href='Hover/css/hover.css')
+    body
+        // Slider
+        #slider-wrap
+            .slider8
+                each val,index in images
+                    each el in val
+                       div(class= index)
+                            img(src= el)
+        // Demonstration
+        #demo
+            .shape
+                img(src='images/Face6.png')
+        // Buttons
+        .buttonDown
+        .buttonUp
+        .endButton.hvr-buzz
+            | END!!!
+        .changeButton
+        script().
+            var images =!{JSON.stringify(images)};
+        script(type="text/javascript", src='jquery/dist/jquery.js')
+        script(type="text/javascript", src='jquery-transform/jquery.transform2d.js')
+        script(type="text/javascript", src='jquery-color/jquery.color.js')
+        script(type="text/javascript", src='dw-bxslider-4/src/js/jquery.bxslider.js')
+        script(type="text/javascript", src='javascripts/imageContainer.js')
+        script(type="text/javascript", src='javascripts/script.js')
 
 

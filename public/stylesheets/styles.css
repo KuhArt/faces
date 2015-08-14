@@ -4,14 +4,14 @@ body {
 }
 
 /*work with procents*/
-.slider-wrap {
+#slider-wrap {
     position: absolute;
     top: 50%;
     left: 20%;
     -webkit-transform: translateY(-50%);
 }
 
-.demo {
+#demo {
     position: absolute;
     top: 50%;
     right: 20%;
@@ -59,14 +59,14 @@ body {
     background-position: -43px 0;
 }
 
-.demo.shape {
+#demo.shape {
     position: absolute;
     top: 0;
     left: 0;
     z-index: 10;
 }
 
-.demo div:not(.shape) {
+#demo div:not(.shape) {
     position: absolute;
     top: 0;
     left: 0;
