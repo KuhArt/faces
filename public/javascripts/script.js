@@ -9,20 +9,20 @@
   var partIndex = 0;
   var cookies = document.cookie;
   var eyes = [
-  "<div class = \"slide eyes\"><img src=\"images/eyes3.png\"> </div>",
-  "<div class = \"slide eyes\"><img src=\"images/eyes4.png\"></div>"
+  "<div class = \"slide eyes\"><img src=\"images/Eyes3.png\"> </div>",
+  "<div class = \"slide eyes\"><img src=\"images/Eyes4.png\"></div>"
   ];
   var noses = [
-  "<div class = \"slide noses\"><img src=\"images/noses1.png\"></div>",
-  "<div class = \"slide noses\"><img src=\"images/noses2.png\"></div>"
+  "<div class = \"slide noses\"><img src=\"images/Nose1.png\"></div>",
+  "<div class = \"slide noses\"><img src=\"images/Nose2.png\"></div>"
   ];
   var lips = [
-  "<div class = \"slide lips\"><img src=\"images/lips3.png\"></div>"  ,
-  "<div class = \"slide lips\"><img src=\"images/lips4.png\"></div>"
+  "<div class = \"slide lips\"><img src=\"images/Lips3.png\"></div>"  ,
+  "<div class = \"slide lips\"><img src=\"images/Lips4.png\"></div>"
   ]; 
   var hair = [
-  "<div class = \"slide hair\"><img src=\"images/hair1.png\"></div>",
-  "<div class = \"slide hair\"><img src=\"images/hair2.png\"></div>"
+  "<div class = \"slide hair\"><img src=\"images/Hair1.png\"></div>",
+  "<div class = \"slide hair\"><img src=\"images/Hair2.png\"></div>"
   ];
 
   var bodyParts = [
@@ -212,7 +212,7 @@ $('.buttonDown').click(function(event) {
       $('.changeButton').click(function(event) {
       activeParts = [];
       $('.body').css({background : colors[0]});
-      $('.demo').animate({left:"58%",top:"32%", transform: "translateY(-60%)"},{duration : "slow"}).empty().append("<div class=\"shape\"><img src=\"images/face6.png\"></div>");
+      $('.demo').animate({left:"58%",top:"32%", transform: "translateY(-60%)"},{duration : "slow"}).empty().append("<div class=\"shape\"><img src=\"images/Face6.png\"></div>");
       $(this).css({visibility : "hidden"});
       $('.slider-wrap').css({visibility : "visible"});
       slider.reloadSlider({mode: 'vertical',
@@ -267,7 +267,7 @@ $('.buttonDown').click(function(event) {
         posEqual = cookies.indexOf("=", posEqual + 1);
       }
       console.log(values);
-      $('.demo').empty().append("<div class=\"shape\"><img src=\"images/face6.png\"></div>");
+      $('.demo').empty().append("<div class=\"shape\"><img src=\"images/Face6.png\"></div>");
       $('body>div:not(.demo)').css({visibility : "hidden"});
       $('.errorButton').css({visibility:"hidden"});
       for(var i = 0; i < bodyParts.length; i++){

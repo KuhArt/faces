@@ -1,0 +1,12 @@
+{
+  "name": "faces",
+  "version": "0.0.0",
+  "dependencies": {
+    "jquery": "~1.11.2",
+    "dw-bxslider-4": "*",
+    "jquery-color": "*",
+    "jquery-transform": "*",
+    "Hover": "*"
+  },
+  "private": true
+}

@@ -1,0 +1,24 @@
+{
+  "name": "jquery.transform.js",
+  "main": [
+    "jquery.transform2d.js",
+    "jquery.transform3d.js"
+  ],
+  "description": "",
+  "license": "Dual licensed under GPL and MIT licenses.",
+  "ignore": [],
+  "dependencies": {
+    "jquery": "~1.7.2"
+  },
+  "devDependencies": {},
+  "homepage": "https://github.com/louisremi/jquery.transform.js",
+  "_release": "e195b9a711",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "e195b9a7118558bb1141e50b80380ea5f31dffb8"
+  },
+  "_source": "git://github.com/louisremi/jquery.transform.js.git",
+  "_target": "*",
+  "_originalSource": "jquery-transform"
+}
