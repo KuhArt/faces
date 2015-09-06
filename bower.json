@@ -6,7 +6,8 @@
     "dw-bxslider-4": "*",
     "jquery-color": "*",
     "jquery-transform": "*",
-    "Hover": "*"
+    "Hover": "*",
+    "jquery-mousewheel": "*"
   },
   "private": true
 }

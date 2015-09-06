@@ -3,10 +3,12 @@ html
     head
         title
         link(rel='stylesheet', type='text/css', href='dw-bxslider-4/src/css/jquery.bxslider.css')
-        link(rel='stylesheet', type='text/css', href='stylesheets/styles.css')
         link(rel='stylesheet', type='text/css', href='Hover/css/hover.css')
+        link(rel='stylesheet', type='text/css', href='stylesheets/styles.css')
     body
-        // Slider
+    #maximize-msg
+        h1 Please, maximize window
+    #wrapper
         #slider-wrap
             .slider8
                 each val,index in images
@@ -18,18 +20,29 @@ html
             .shape
                 img(src='images/Face6.png')
         // Buttons
-        .buttonDown
-        .buttonUp
-        .endButton.hvr-buzz
-            | END!!!
-        .changeButton
+        #buttonDown.but
+        #buttonUp.but
+        #endButton.hvr-pulse.but End
+        #changeButton.hvr-pulse.but Change
+        h1#res-text Your result!
+        h2#scroll-text Scroll down to see another faces
+        //Results
+
+    #results
+        each res in resul
+            .result
+                each img in res
+                    .body-part
+                        img(src= img)
         script().
             var images =!{JSON.stringify(images)};
         script(type="text/javascript", src='jquery/dist/jquery.js')
+        script(type="text/javascript", src='javascripts/bundle.js')
+        script(type="text/javascript", src='jquery-mousewheel/jquery.mousewheel.min.js')
         script(type="text/javascript", src='jquery-transform/jquery.transform2d.js')
         script(type="text/javascript", src='jquery-color/jquery.color.js')
         script(type="text/javascript", src='dw-bxslider-4/src/js/jquery.bxslider.js')
         script(type="text/javascript", src='javascripts/imageContainer.js')
-        script(type="text/javascript", src='javascripts/script.js')
-
+        script(type="text/javascript", src="javascripts/scrollPreventer.js")
+       // script(type="text/javascript", src='javascripts/script.js')
 

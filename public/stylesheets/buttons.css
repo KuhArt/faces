@@ -1,0 +1,59 @@
+#endButton, #changeButton {
+    background-color: #ccc;
+    position: absolute;
+    left: 58%;
+    bottom: 17%;
+    width: 200px;
+    height: 70px;
+    border-radius: 20px;
+    visibility: hidden;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 70px;
+}
+#changeButton {
+    left: 40%;
+    bottom: -100%;
+}
+
+.but:hover{
+    cursor: pointer;
+}
+
+#buttonDown {
+    position: absolute;
+    bottom: 0;
+    left: 33%;
+    width: 32px;
+    height: 32px;
+    background: url(../images/controls.png) no-repeat 0 -32px;
+    -webkit-transform:translateX(-50%) rotate(-90deg);
+    -moz-transform:translateX(-50%)rotate(-90deg);
+    -ms-transform:translateX(-50%) rotate(-90deg);
+    -o-transform:translateX(-50%) rotate(-90deg);
+    transform:translateX(-50%) rotate(-90deg);
+
+}
+
+#buttonUp {
+    right: 10px;
+    background: url(../images/controls.png) no-repeat -43px -32px;
+    position: absolute;
+    top: 0;
+    left: 33%;
+    width: 32px;
+    height: 32px;
+    -webkit-transform:translateX(-50%) rotate(-90deg);
+    -moz-transform:translateX(-50%) rotate(-90deg);
+    -ms-transform:translateX(-50%) rotate(-90deg);
+    -o-transform:translateX(-50%) rotate(-90deg);
+    transform:translateX(-50%) rotate(-90deg);
+}
+
+#buttonUp:hover {
+    background-position: -43px 0;
+}
+
+#buttonDown:hover {
+    background-position: 0 0;
+}
