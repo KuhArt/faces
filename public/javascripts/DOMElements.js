@@ -16,5 +16,6 @@ module.exports = {
         height: window.innerHeight + 'px'
     }),
     $resText: $('#res-text').css({visibility: "hidden"}),
-    $scrollText: $('#scroll-text').css({visibility: "hidden"})
+    $scrollText: $('#scroll-text').css({visibility: "hidden"}),
+    $canvas : $('#my-canvas').hide()
 };

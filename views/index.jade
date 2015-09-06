@@ -6,43 +6,44 @@ html
         link(rel='stylesheet', type='text/css', href='Hover/css/hover.css')
         link(rel='stylesheet', type='text/css', href='stylesheets/styles.css')
     body
-    #maximize-msg
-        h1 Please, maximize window
-    #wrapper
-        #slider-wrap
-            .slider8
-                each val,index in images
-                    each el in val
-                       div(class= index)
-                            img(src= el)
-        // Demonstration
-        #demo
-            .shape
-                img(src='images/Face6.png')
-        // Buttons
-        #buttonDown.but
-        #buttonUp.but
-        #endButton.hvr-pulse.but End
-        #changeButton.hvr-pulse.but Change
-        h1#res-text Your result!
-        h2#scroll-text Scroll down to see another faces
-        //Results
+        canvas#my-canvas(width=300,height=300)
+        #maximize-msg
+            h1 Please, maximize window
+        #wrapper
+            #slider-wrap
+                .slider8
+                    each val,index in images
+                        each el in val
+                           div(class= index)
+                                img(src= el)
+            // Demonstration
+            #demo
+                .shape
+                    img(src='images/Face6.png')
+            // Buttons
+            #buttonDown.but
+            #buttonUp.but
+            #endButton.hvr-pulse.but End
+            #changeButton.hvr-pulse.but Change
+            h1#res-text Your result!
+            h2#scroll-text Scroll down to see another faces
+            //Results
 
-    #results
-        each res in resul
-            .result
-                each img in res
-                    .body-part
-                        img(src= img)
-        script().
-            var images =!{JSON.stringify(images)};
-        script(type="text/javascript", src='jquery/dist/jquery.js')
-        script(type="text/javascript", src='javascripts/bundle.js')
-        script(type="text/javascript", src='jquery-mousewheel/jquery.mousewheel.min.js')
-        script(type="text/javascript", src='jquery-transform/jquery.transform2d.js')
-        script(type="text/javascript", src='jquery-color/jquery.color.js')
-        script(type="text/javascript", src='dw-bxslider-4/src/js/jquery.bxslider.js')
-        script(type="text/javascript", src='javascripts/imageContainer.js')
-        script(type="text/javascript", src="javascripts/scrollPreventer.js")
-       // script(type="text/javascript", src='javascripts/script.js')
+        #results
+            each res in resul
+                .result
+                    each img in res
+                        .body-part
+                            img(src= img)
+            script().
+                var images =!{JSON.stringify(images)};
+            script(type="text/javascript", src='jquery/dist/jquery.js')
+            script(type="text/javascript", src='bundle.js')
+            script(type="text/javascript", src='jquery-mousewheel/jquery.mousewheel.min.js')
+            script(type="text/javascript", src='jquery-transform/jquery.transform2d.js')
+            script(type="text/javascript", src='jquery-color/jquery.color.js')
+            script(type="text/javascript", src='dw-bxslider-4/src/js/jquery.bxslider.js')
+            script(type="text/javascript", src='javascripts/imageContainer.js')
+            script(type="text/javascript", src="javascripts/scrollPreventer.js")
+           // script(type="text/javascript", src='javascripts/script.js')
 

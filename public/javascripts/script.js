@@ -5,17 +5,6 @@ $(document).ready(function () {
     disableScroll();
     buttons();
     $('html, body').animate({scrollTop: 0}, 'slow');
-    elements.$results.on('click', function (event) {
-        console.log(event.target);
-        if ($(event.target).is('img')) {
-            console.log('image click');
-            //get parent
-            $("#demo>div:not(.shape)").remove();
-            console.log($(event.target).parents()[1]);
-            $($(event.target).parents()[1]).clone().contents().css({transform: "scale(1.5,1.5)"}).appendTo(elements.$demo);
-            $("html, body").animate({scrollTop: 0}, 'slow');
-        }
-    });
     $(window).resize(function () {
         console.log("window size changed");
         elements.$wrapper.css({

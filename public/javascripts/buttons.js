@@ -6,8 +6,19 @@ var elements = require('./DOMElements.js');
 var slider = require('./sliderSettings.js');
 var handlers = require('./scrollHandlers.js');
 var mergeImages = function () {
-      var parts = elements.$demo.children();
-      console.log(parts);
+    var parts = elements.$demo.find('img'),
+        canvas = document.getElementById('my-canvas'),
+        context = canvas.getContext('2d');
+    for (var i = 0, max = parts.length; i < max; i += 1) {
+        var img = new Image();
+        img.src = parts[i].src;
+        context.drawImage(img,0,0,300,300);
+    }
+    var res = canvas.toDataURL("img/png");
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    elements.$demo.empty();
+    elements.$demo.html("<img " + "src=" + "\"" + res + "\"" + "/>");
+    console.log(res);
 };
 
 module.exports = function () {
@@ -64,10 +75,12 @@ module.exports = function () {
     elements.$endButton.click(function () {
         mergeImages();
         enableScroll();
-        $('html, body').on('mousewheel', handlers.wheelHandler);
-        $('html, body').on('keypress',handlers.keyHandler);
+        $('html, body')
+            .on('mousewheel', handlers.wheelHandler)
+            .on('keypress', handlers.keyHandler);
         $("#wrapper>div:not(#demo)").css({visibility: "hidden"});
-        elements.$scrollText.css({visibility: 'visible'})
+        elements.$canvas.css({visibility: 'visible'});
+        elements.$scrollText.css({visibility: 'visible'});
         elements.$resText.css({visibility: 'visible'});
         elements.$results.css({visibility: "visible"});
         elements.$demo.animate({
@@ -83,15 +96,33 @@ module.exports = function () {
         elements.$changeButton.css({visibility: "visible"});
     });
 
+    elements.$results.on('click', function (event) {
+        console.log(event.target);
+        if ($(event.target).is('img')) {
+            console.log('image click');
 
+            elements.$demo.empty().append("<div class=\"shape\"><img src=\"images/Face6.png\"></div>");
+            console.log($(event.target).parents()[1]);
+            $($(event.target).parents()[1])
+                .clone()
+                .contents()
+                .appendTo(elements.$demo);
+            mergeImages();
+            elements.$demo.find('img').css({transform: "scale(1.5,1.5)"});
+            $("html, body").animate({scrollTop: 0}, 'slow');
+        }
+    });
     elements.$changeButton.click(function () {
-        $('html, body').off('mousewheel', handlers.wheelHandler);
-        $('html, body').off('keypress', handlers.keyHandler);
+        $('html, body')
+            .off('mousewheel', handlers.wheelHandler)
+            .off('keypress', handlers.keyHandler)
+            .animate({scrollTop: 0}, "slow");
         elements.$scrollText.css({visibility: 'hidden'});
         elements.$resText.css({visibility: 'hidden'});
+        elements.$buttonUp.css({visibility: "hidden"});
+        elements.$buttonDown.css({visibility: "visible"});
+        elements.$slider_wrap.css({visibility: "visible"});
         imagesContainer.setActiveDefault();
-        $("html, body").animate({scrollTop: 0}, "slow");
-        elements.$body.css({overflow: "hidden"});
         elements.$demo
             .animate({
                 left: "66%",
@@ -100,9 +131,6 @@ module.exports = function () {
             .empty()
             .append("<div class=\"shape\"><img src=\"images/Face6.png\"></div>");
         $(this).css({visibility: "hidden"});
-        elements.$slider_wrap.css({visibility: "visible"});
         slider.init(imagesContainer.goToStart().next());
-        elements.$buttonUp.css({visibility: "hidden"});
-        elements.$buttonDown.css({visibility: "visible"});
     });
 };
