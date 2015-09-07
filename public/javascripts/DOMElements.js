@@ -17,5 +17,6 @@ module.exports = {
     }),
     $resText: $('#res-text').css({visibility: "hidden"}),
     $scrollText: $('#scroll-text').css({visibility: "hidden"}),
-    $canvas : $('#my-canvas').hide()
+    $canvas : $('#my-canvas').hide(),
+    $vkShare : $('#vk-share-button')
 };

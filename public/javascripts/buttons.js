@@ -18,6 +18,26 @@ var mergeImages = function () {
     context.clearRect(0, 0, canvas.width, canvas.height);
     elements.$demo.empty();
     elements.$demo.html("<img " + "src=" + "\"" + res + "\"" + "/>");
+    console.log("Image",location.origin +"/"+elements.$demo.find('img')[0].src);
+    $.get('/result', {merge: res}, function (data) {
+        console.log(data);
+        console.log(location.origin+data);
+        elements.$vkShare.html(VK.Share.button({url:
+        location.origin +'&'+
+        '&title=Заголовок статьи&' +
+        'description=Краткое описание статьи&' +
+        'image='+location.origin+data+'&' +
+        'noparse=true'}));
+    //    window.location.href = data.redirect;
+    });
+
+    //elements.$vkShare.html(VK.Share.button({
+    //    url: location.origin,
+    //    title: 'Хороший сайт',
+    //    description: 'Это мой собственный сайт, я его очень долго делал',
+    //        image: 'https://pp.vk.me/c629425/v629425850/9498/COFKIzmSBw8.jpg',
+    //    noparse: true
+    //}));
     console.log(res);
 };
 
@@ -83,6 +103,7 @@ module.exports = function () {
         elements.$scrollText.css({visibility: 'visible'});
         elements.$resText.css({visibility: 'visible'});
         elements.$results.css({visibility: "visible"});
+        elements.$vkShare.css({visibility: "visible"});
         elements.$demo.animate({
             left: "50%",
             top: "50%"
@@ -90,9 +111,7 @@ module.exports = function () {
         elements.$demo.find('img').animate({
             transform: "scale(1.5,1.5)"
         }, {duration: "slow"});
-        $.get('/result', {hello: 'hello'}, function (data) {
-            console.log(data);
-        });
+
         elements.$changeButton.css({visibility: "visible"});
     });
 
@@ -122,6 +141,7 @@ module.exports = function () {
         elements.$buttonUp.css({visibility: "hidden"});
         elements.$buttonDown.css({visibility: "visible"});
         elements.$slider_wrap.css({visibility: "visible"});
+
         imagesContainer.setActiveDefault();
         elements.$demo
             .animate({

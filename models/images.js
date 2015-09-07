@@ -3,7 +3,7 @@
  */
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/faces');
+mongoose.connect('mongodb://faces:14657759139@ds035713.mongolab.com:35713/faces');
 
 var db = mongoose.connection;
 

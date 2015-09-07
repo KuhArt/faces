@@ -16,6 +16,13 @@
     bottom: -100%;
 }
 
+#vk-share-button {
+    position: absolute;
+    left: 80%;
+    bottom: -100%;
+}
+
+
 .but:hover{
     cursor: pointer;
 }

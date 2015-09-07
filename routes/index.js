@@ -1,5 +1,6 @@
 var express = require('express');
 var imgs = require('../models/images');
+var fs = require('fs');
 //var results = require('../models/results');
 var router = express.Router();
 
@@ -52,9 +53,21 @@ router.get('/', function (req, res, next) {
 
 router.get('/result', function (req, res, next) {
     if (req.xhr) {
-
+        console.log(req.query.merge);
+       var data = req.query.merge,
+           regex = /^data:.+\/(.+);base64,(.*)$/,
+           matches = data.match(regex),
+           ext = matches[1],
+           image = matches[2],
+           buffer = new Buffer(image, 'base64');
+            var pathAr = __dirname.split('/');
+                pathAr.pop();
+            var path = pathAr.join('/')+'/public';
+            var relPath = '/images/data.' + ext;
+          console.log(matches[2]);
+        fs.writeFileSync(path + relPath, buffer);
+        res.send(relPath);
     }
-    res.redirect('/');
 
 });
 module.exports = router;
