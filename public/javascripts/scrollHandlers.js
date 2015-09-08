@@ -18,7 +18,8 @@ module.exports = {
             var timeDiff = curTime - prevTime;
             if (timeDiff > 200) {
                 if (event.deltaY < 0) {
-                    $('html, body').animate({scrollTop: $('#results').offset().top}, 'slow');
+                    console.log($('#results').offset().top);
+                    $('html, body').animate({scrollTop: $('#results').offset().top +10}, 'slow');
                 } else {
                     if (event.deltaY > 0) {
                         $('html, body').animate({scrollTop: 0}, 'slow');

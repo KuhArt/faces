@@ -3,8 +3,9 @@ html
     head
         title
         link(rel='stylesheet', type='text/css', href='dw-bxslider-4/src/css/jquery.bxslider.css')
-        link(rel='stylesheet', type='text/css', href='Hover/css/hover.css')
+        link(rel='stylesheet', type='text/css', href='Hover/css/hover-min.css')
         link(rel='stylesheet', type='text/css', href='stylesheets/styles.css')
+        link(href='https://fonts.googleapis.com/css?family=Luckiest+Guy' rel='stylesheet' type='text/css')
         script(type="text/javascript" src="http://vk.com/js/api/share.js?90" harset="windows-1251")
     body
         canvas#my-canvas(width=300,height=300)
@@ -24,8 +25,8 @@ html
             // Buttons
             #buttonDown.but
             #buttonUp.but
-            #endButton.hvr-pulse.but End
-            #changeButton.hvr-pulse.but Change
+            #endButton.hvr-sweep-to-bottom.but End
+            #changeButton.hvr-sweep-to-bottom.but Change
             #vk-share-button
             h1#res-text Your result!
             h2#scroll-text Scroll down to see another faces
@@ -37,6 +38,7 @@ html
                     each img in res
                         .body-part
                             img(src= img)
+        #block
             script().
                 var images =!{JSON.stringify(images)};
             script(type="text/javascript", src='jquery/dist/jquery.js')

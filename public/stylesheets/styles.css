@@ -2,9 +2,12 @@
 @import "results.css";
 @import "demo.css";
 body {
+    font-family: 'Luckiest Guy', cursive;
+    background-color: #E4F4FA;
     overflow: hidden;
     height: 100%;
     margin: 0;
+
 }
 #wrapper{
     box-sizing: border-box;
@@ -13,7 +16,7 @@ body {
     height: auto;
     min-height: 100%;
     /*width: 100%;*/
-    border: dotted;
+    border: 2px solid #36C3E0;
     top:0;
     right: 0;
     left: 0;
@@ -38,13 +41,14 @@ body {
 
 h1 {
     font-family: 'Luckiest Guy', cursive;
-    color: #acacac;
-    font-size: 64px;
+    color:  #36C3E0;
+    font-size: 48px;
     left: 20%;
     text-align: center;
 }
 h2{
     position: absolute;
+    color: #2ea8e0;
     bottom: 0;
     left: 50%;
     -webkit-transform: translate(-50%,-50%);
@@ -53,4 +57,11 @@ h2{
     -ms-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
 
+}
+
+#block{
+    position: absolute;
+    bottom: -105%;
+    width: 100%;
+    height: 15px;
 }

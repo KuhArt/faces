@@ -1,22 +1,35 @@
 #results{
     position: absolute;
     clear: both;
-    top: 120%;
-    left: 14%;
+    top: 140%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
 }
 .result img{
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
 }
 .result{
-    background-image: url("../images/Face6.png");
+    background: url("../images/Face6.png");
+    background-size: contain ;
     display: inline-block;
-    border: dashed;
-    width: 300px;
-    height: 300px;
+    border:2px solid #36C3E0;
+    width: 202px;
+    height: 202px;
     position: relative;
     margin: 5px;
+}
+
+.result:hover{
+    background: #4ae0dc url("../images/Face6.png");
+    background-size: contain
 }
 
 .result:hover{

@@ -43,7 +43,7 @@ var mergeImages = function () {
     elements.$demo.empty();
     elements.$demo.html("<img " + "src=" + "\"" + res + "\"" + "/>");
     console.log("Image",location.origin +"/"+elements.$demo.find('img')[0].src);
-    $.get('/result', {merge: res}, function (data) {
+    $.post('/result', {merge: res}, function (data) {
         console.log(data);
         console.log(location.origin+data);
         elements.$vkShare.html(VK.Share.button({url:
@@ -183,6 +183,16 @@ $(document).ready(function () {
 //    var slider = require('sliderSettings.js');
     var elements = require('./DOMElements.js');
     var buttons = require('./buttons.js');
+    var slider = require('./sliderSettings');
+    var sliderBug = true;
+    if (screen.availHeight !== outerHeight
+        || screen.availWidth !== outerWidth) {
+        if (!elements.$maximizeMassage.is(':visible')) {
+            elements.$wrapper.hide();
+            elements.$maximizeMassage.show();
+            console.log('Not maximize');
+        }
+    }
     disableScroll();
     buttons();
     $('html, body').animate({scrollTop: 0}, 'slow');
@@ -192,6 +202,11 @@ $(document).ready(function () {
             width: window.innerWidth + 'px',
             height: window.innerHeight + 'px'
         });
+        if(sliderBug){
+            slider.init(imagesContainer.goToStart().next())
+            sliderBug =false;
+        }
+
         if (screen.availHeight === outerHeight
             && screen.availWidth === outerWidth) {
             elements.$wrapper.show();
@@ -213,7 +228,7 @@ $(document).ready(function () {
 
 
 
-},{"./DOMElements.js":1,"./buttons.js":2}],4:[function(require,module,exports){
+},{"./DOMElements.js":1,"./buttons.js":2,"./sliderSettings":5}],4:[function(require,module,exports){
 /**
  * Created by artkuh on 31.8.15.
  */
@@ -234,7 +249,8 @@ module.exports = {
             var timeDiff = curTime - prevTime;
             if (timeDiff > 200) {
                 if (event.deltaY < 0) {
-                    $('html, body').animate({scrollTop: $('#results').offset().top}, 'slow');
+                    console.log($('#results').offset().top);
+                    $('html, body').animate({scrollTop: $('#results').offset().top +10}, 'slow');
                 } else {
                     if (event.deltaY > 0) {
                         $('html, body').animate({scrollTop: 0}, 'slow');

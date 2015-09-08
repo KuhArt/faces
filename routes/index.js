@@ -26,16 +26,16 @@ router.get('/', function (req, res, next) {
         var query = imgs.Results.find({});
         query
             .limit(3)
-            .skip(2)
+            .skip(Math.floor(Math.random() * 6))
             .exec(function (err, data) {
-           //     console.log(data);
                 var results = [];
                 for (var i = 0; i < data.length; i += 1) {
                     var values = [];
                     for (var key in data[i]._doc) {
                         if (data[i]._doc.hasOwnProperty(key)) {
-                            values.push(data[i][key]);
-                      //      console.log("KEY:",key," VAL",data[i][key]);
+                            if( key != '_id') {
+                                values.push(data[i][key]);
+                            }
                         }
                     }
                     results.push(values);
@@ -51,23 +51,21 @@ router.get('/', function (req, res, next) {
 });
 
 
-router.get('/result', function (req, res, next) {
-    if (req.xhr) {
-        console.log(req.query.merge);
-       var data = req.query.merge,
-           regex = /^data:.+\/(.+);base64,(.*)$/,
-           matches = data.match(regex),
-           ext = matches[1],
-           image = matches[2],
-           buffer = new Buffer(image, 'base64');
-            var pathAr = __dirname.split('/');
-                pathAr.pop();
-            var path = pathAr.join('/')+'/public';
-            var relPath = '/images/data.' + ext;
-          console.log(matches[2]);
+router.post('/result', function (req, res, next) {
+    if(req.xhr) {
+        var data = req.body.merge,
+            regex = /^data:.+\/(.+);base64,(.*)$/,
+            matches = data.match(regex),
+            ext = matches[1],
+            image = matches[2],
+            buffer = new Buffer(image, 'base64');
+        var pathAr = __dirname.split('/');
+        pathAr.pop();
+        var path = pathAr.join('/') + '/public';
+        var relPath = '/images/data.' + ext;
+        console.log(matches[2]);
         fs.writeFileSync(path + relPath, buffer);
         res.send(relPath);
     }
-
 });
 module.exports = router;

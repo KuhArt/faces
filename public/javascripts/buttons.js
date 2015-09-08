@@ -19,7 +19,7 @@ var mergeImages = function () {
     elements.$demo.empty();
     elements.$demo.html("<img " + "src=" + "\"" + res + "\"" + "/>");
     console.log("Image",location.origin +"/"+elements.$demo.find('img')[0].src);
-    $.get('/result', {merge: res}, function (data) {
+    $.post('/result', {merge: res}, function (data) {
         console.log(data);
         console.log(location.origin+data);
         elements.$vkShare.html(VK.Share.button({url:
