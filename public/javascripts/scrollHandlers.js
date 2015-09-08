@@ -18,13 +18,12 @@ module.exports = {
             var timeDiff = curTime - prevTime;
             if (timeDiff > 200) {
                 if (event.deltaY < 0) {
-                    $('html, body').animate({scrollTop: $('#results').offset().top}, 'slow');
+                    $('html, body').animate({scrollTop: $('#results').offset().top +10}, 'slow');
                 } else {
                     if (event.deltaY > 0) {
                         $('html, body').animate({scrollTop: 0}, 'slow');
                     }
                 }
-                console.log('New kinetic scroll has started!');
             }
         }
         prevTime = curTime;

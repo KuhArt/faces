@@ -29,6 +29,8 @@ module.exports = {
 var elements = require('./DOMElements.js');
 var slider = require('./sliderSettings.js');
 var handlers = require('./scrollHandlers.js');
+var imagesContainer = require('./imageContainer.js');
+var scroll = require('./scrollPreventer.js');
 var mergeImages = function () {
     var parts = elements.$demo.find('img'),
         canvas = document.getElementById('my-canvas'),
@@ -42,34 +44,21 @@ var mergeImages = function () {
     context.clearRect(0, 0, canvas.width, canvas.height);
     elements.$demo.empty();
     elements.$demo.html("<img " + "src=" + "\"" + res + "\"" + "/>");
-    console.log("Image",location.origin +"/"+elements.$demo.find('img')[0].src);
-    $.get('/result', {merge: res}, function (data) {
-        console.log(data);
-        console.log(location.origin+data);
+    $.post('/result', {merge: res}, function (data) {
+        elements.$vkShare.empty();
         elements.$vkShare.html(VK.Share.button({url:
         location.origin +'&'+
-        '&title=Заголовок статьи&' +
-        'description=Краткое описание статьи&' +
+        '&title=Awesome site&' +
+        'description=Awesome Awesome Awesome&' +
         'image='+location.origin+data+'&' +
         'noparse=true'}));
-    //    window.location.href = data.redirect;
     });
-
-    //elements.$vkShare.html(VK.Share.button({
-    //    url: location.origin,
-    //    title: 'Хороший сайт',
-    //    description: 'Это мой собственный сайт, я его очень долго делал',
-    //        image: 'https://pp.vk.me/c629425/v629425850/9498/COFKIzmSBw8.jpg',
-    //    noparse: true
-    //}));
-    console.log(res);
 };
 
 module.exports = function () {
     elements.$buttonUp.
         click(function () {
             var bodyPart = imagesContainer.previous();
-            console.log('prev', bodyPart);
             elements.$slider_wrap.
                 animate({top: "-30%"},
                 {
@@ -93,7 +82,6 @@ module.exports = function () {
 
     elements.$buttonDown.click(function () {
         var bodyPart = imagesContainer.next();
-        console.log('next', bodyPart, 'hasNext:', imagesContainer.hasNext());
         elements.$slider_wrap.
             animate({top: "150%"},
             {
@@ -118,7 +106,7 @@ module.exports = function () {
 
     elements.$endButton.click(function () {
         mergeImages();
-        enableScroll();
+        scroll.enableScroll();
         $('html, body')
             .on('mousewheel', handlers.wheelHandler)
             .on('keypress', handlers.keyHandler);
@@ -140,12 +128,9 @@ module.exports = function () {
     });
 
     elements.$results.on('click', function (event) {
-        console.log(event.target);
         if ($(event.target).is('img')) {
-            console.log('image click');
 
             elements.$demo.empty().append("<div class=\"shape\"><img src=\"images/Face6.png\"></div>");
-            console.log($(event.target).parents()[1]);
             $($(event.target).parents()[1])
                 .clone()
                 .contents()
@@ -178,42 +163,116 @@ module.exports = function () {
         slider.init(imagesContainer.goToStart().next());
     });
 };
-},{"./DOMElements.js":1,"./scrollHandlers.js":4,"./sliderSettings.js":5}],3:[function(require,module,exports){
+},{"./DOMElements.js":1,"./imageContainer.js":3,"./scrollHandlers.js":5,"./scrollPreventer.js":6,"./sliderSettings.js":7}],3:[function(require,module,exports){
+/**
+ * Created by artkuh on 14.8.15.
+ */
+
+module.exports = (function () {
+    var insideImages = images,
+        index = -1,
+        keys = [],
+        activeParts ={} ;
+    for (var i = 0, allKeys = Object.keys(insideImages); i < allKeys.length; i += 1) {
+        var key = allKeys[i];
+        if (insideImages.hasOwnProperty(key)) {
+            keys[i] = key;
+            activeParts[key] = 0;
+        }
+    }
+  images = undefined;
+    return {
+        hasNext: function () {
+            return index != keys.length - 1;
+        },
+        hasPrevious: function () {
+            return index != 0;
+        },
+        next: function () {
+            index++;
+            var key = keys[index],
+                obj = {type: key, bodyParts: insideImages[key]};
+            return obj;
+        },
+        previous: function () {
+            index--;
+            var key = keys[index],
+                obj = {type: key, bodyParts: insideImages[key]};
+            return obj;
+        },
+        goToStart: function () {
+            index = -1;
+            return this;
+        },
+        getActivePart: function (type) {
+            return activeParts[type];
+        },
+        setActivePart: function (type, index) {
+            activeParts[type] = index;
+        },
+        size: function () {
+            return keys.length;
+        },
+        setActiveDefault: function () {
+         for(var key in activeParts){
+             if(activeParts.hasOwnProperty(key)){
+                 activeParts[key] = 0;
+             }
+         }
+        }
+
+    }
+
+})();
+
+},{}],4:[function(require,module,exports){
 $(document).ready(function () {
 //    var slider = require('sliderSettings.js');
     var elements = require('./DOMElements.js');
     var buttons = require('./buttons.js');
-    disableScroll();
+    var slider = require('./sliderSettings');
+    var imagesContainer = require('./imageContainer.js');
+    var scroll = require('./scrollPreventer.js');
+    var sliderBug = true;
+    if (screen.availHeight !== outerHeight
+        || screen.availWidth !== outerWidth) {
+        if (!elements.$maximizeMassage.is(':visible')) {
+            elements.$wrapper.hide();
+            elements.$maximizeMassage.show();
+        }
+    }
+    scroll.disableScroll();
     buttons();
     $('html, body').animate({scrollTop: 0}, 'slow');
     $(window).resize(function () {
-        console.log("window size changed");
         elements.$wrapper.css({
             width: window.innerWidth + 'px',
             height: window.innerHeight + 'px'
         });
+        if(sliderBug){
+            slider.init(imagesContainer.goToStart().next())
+            sliderBug =false;
+        }
+
         if (screen.availHeight === outerHeight
             && screen.availWidth === outerWidth) {
             elements.$wrapper.show();
             elements.$maximizeMassage.hide();
-            console.log("Maximize");
         } else {
             if (!elements.$maximizeMassage.is(':visible')) {
                 //Hide all body nodes
                 elements.$wrapper.hide();
                 elements.$maximizeMassage.show();
-                console.log('Not maximize');
             }
         }
     });
-    console.log(location.origin);
 
 });
 
 
 
 
-},{"./DOMElements.js":1,"./buttons.js":2}],4:[function(require,module,exports){
+},{"./DOMElements.js":1,"./buttons.js":2,"./imageContainer.js":3,"./scrollPreventer.js":6,"./sliderSettings":7}],5:[function(require,module,exports){
 /**
  * Created by artkuh on 31.8.15.
  */
@@ -234,24 +293,61 @@ module.exports = {
             var timeDiff = curTime - prevTime;
             if (timeDiff > 200) {
                 if (event.deltaY < 0) {
-                    $('html, body').animate({scrollTop: $('#results').offset().top}, 'slow');
+                    $('html, body').animate({scrollTop: $('#results').offset().top +10}, 'slow');
                 } else {
                     if (event.deltaY > 0) {
                         $('html, body').animate({scrollTop: 0}, 'slow');
                     }
                 }
-                console.log('New kinetic scroll has started!');
             }
         }
         prevTime = curTime;
         event.preventDefault()
     }
 };
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
+/**
+ * Created by artkuh on 20.8.15.
+ */
+var keys = {37: 1, 38: 1, 39: 1, 40: 1};
+
+function preventDefault(e) {
+    e = e || window.event;
+    if (e.preventDefault)
+        e.preventDefault();
+    e.returnValue = false;
+}
+
+function preventDefaultForScrollKeys(e) {
+    if (keys[e.keyCode]) {
+        preventDefault(e);
+        return false;
+    }
+}
+
+exports.disableScroll = function() {
+    if (window.addEventListener) // older FF
+        window.addEventListener('DOMMouseScroll', preventDefault, false);
+    window.onwheel = preventDefault; // modern standard
+    window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
+    window.ontouchmove  = preventDefault; // mobile
+    document.onkeydown  = preventDefaultForScrollKeys;
+}
+
+exports.enableScroll = function () {
+    if (window.removeEventListener)
+        window.removeEventListener('DOMMouseScroll', preventDefault, false);
+    window.onmousewheel = document.onmousewheel = null;
+    window.onwheel = null;
+    window.ontouchmove = null;
+    document.onkeydown = null;
+}
+},{}],7:[function(require,module,exports){
 /**
  * Created by artkuh on 31.8.15.
  */
 var elements = require('./DOMElements.js');
+var imagesContainer = require('./imageContainer.js')
 var
     slider = {},
     onSlideAfter = function (bodyPart) {
@@ -277,7 +373,6 @@ var
 
             imagesContainer.setActivePart(bodyPart.type, index);
             elements.$demo.append('<div class = \"' + bodyPart.type + '\"><img src=\"' + bodyPart.bodyParts[index] + '\"> </div>');
-            console.log('demo.length:', elements.$demo.find('div').length, 'container size:', imagesContainer.size() + 1)
             if (elements.$demo.find('div').length == imagesContainer.size() + 1) {
                 elements.$endButton.css({"visibility": "visible"});
             }
@@ -306,4 +401,4 @@ slider.init = (function () {
     }
 })();
 module.exports = slider;
-},{"./DOMElements.js":1}]},{},[3]);
+},{"./DOMElements.js":1,"./imageContainer.js":3}]},{},[4]);

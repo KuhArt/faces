@@ -17,7 +17,7 @@ function preventDefaultForScrollKeys(e) {
     }
 }
 
-function disableScroll() {
+exports.disableScroll = function() {
     if (window.addEventListener) // older FF
         window.addEventListener('DOMMouseScroll', preventDefault, false);
     window.onwheel = preventDefault; // modern standard
@@ -26,7 +26,7 @@ function disableScroll() {
     document.onkeydown  = preventDefaultForScrollKeys;
 }
 
-function enableScroll() {
+exports.enableScroll = function () {
     if (window.removeEventListener)
         window.removeEventListener('DOMMouseScroll', preventDefault, false);
     window.onmousewheel = document.onmousewheel = null;

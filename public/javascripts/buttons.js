@@ -5,6 +5,8 @@
 var elements = require('./DOMElements.js');
 var slider = require('./sliderSettings.js');
 var handlers = require('./scrollHandlers.js');
+var imagesContainer = require('./imageContainer.js');
+var scroll = require('./scrollPreventer.js');
 var mergeImages = function () {
     var parts = elements.$demo.find('img'),
         canvas = document.getElementById('my-canvas'),
@@ -18,34 +20,21 @@ var mergeImages = function () {
     context.clearRect(0, 0, canvas.width, canvas.height);
     elements.$demo.empty();
     elements.$demo.html("<img " + "src=" + "\"" + res + "\"" + "/>");
-    console.log("Image",location.origin +"/"+elements.$demo.find('img')[0].src);
-    $.get('/result', {merge: res}, function (data) {
-        console.log(data);
-        console.log(location.origin+data);
+    $.post('/result', {merge: res}, function (data) {
+        elements.$vkShare.empty();
         elements.$vkShare.html(VK.Share.button({url:
         location.origin +'&'+
-        '&title=Заголовок статьи&' +
-        'description=Краткое описание статьи&' +
+        '&title=Awesome site&' +
+        'description=Awesome Awesome Awesome&' +
         'image='+location.origin+data+'&' +
         'noparse=true'}));
-    //    window.location.href = data.redirect;
     });
-
-    //elements.$vkShare.html(VK.Share.button({
-    //    url: location.origin,
-    //    title: 'Хороший сайт',
-    //    description: 'Это мой собственный сайт, я его очень долго делал',
-    //        image: 'https://pp.vk.me/c629425/v629425850/9498/COFKIzmSBw8.jpg',
-    //    noparse: true
-    //}));
-    console.log(res);
 };
 
 module.exports = function () {
     elements.$buttonUp.
         click(function () {
             var bodyPart = imagesContainer.previous();
-            console.log('prev', bodyPart);
             elements.$slider_wrap.
                 animate({top: "-30%"},
                 {
@@ -69,7 +58,6 @@ module.exports = function () {
 
     elements.$buttonDown.click(function () {
         var bodyPart = imagesContainer.next();
-        console.log('next', bodyPart, 'hasNext:', imagesContainer.hasNext());
         elements.$slider_wrap.
             animate({top: "150%"},
             {
@@ -94,7 +82,7 @@ module.exports = function () {
 
     elements.$endButton.click(function () {
         mergeImages();
-        enableScroll();
+        scroll.enableScroll();
         $('html, body')
             .on('mousewheel', handlers.wheelHandler)
             .on('keypress', handlers.keyHandler);
@@ -116,12 +104,9 @@ module.exports = function () {
     });
 
     elements.$results.on('click', function (event) {
-        console.log(event.target);
         if ($(event.target).is('img')) {
-            console.log('image click');
 
             elements.$demo.empty().append("<div class=\"shape\"><img src=\"images/Face6.png\"></div>");
-            console.log($(event.target).parents()[1]);
             $($(event.target).parents()[1])
                 .clone()
                 .contents()

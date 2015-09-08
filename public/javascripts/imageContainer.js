@@ -2,8 +2,7 @@
  * Created by artkuh on 14.8.15.
  */
 
-var imagesContainer = (function () {
-    console.log(images);
+module.exports = (function () {
     var insideImages = images,
         index = -1,
         keys = [],
@@ -16,10 +15,8 @@ var imagesContainer = (function () {
         }
     }
   images = undefined;
-    console.log(insideImages,keys,activeParts);
     return {
         hasNext: function () {
-            console.log('hasNext: index',index,'max',keys.length - 1);
             return index != keys.length - 1;
         },
         hasPrevious: function () {

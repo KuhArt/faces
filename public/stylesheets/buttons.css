@@ -1,25 +1,33 @@
 #endButton, #changeButton {
-    background-color: #ccc;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    padding:0;
+    background-color: #e1e1e1;
     position: absolute;
-    left: 58%;
-    bottom: 17%;
-    width: 200px;
+    left: 66%;
+    bottom: 10%;
+    width: 300px;
     height: 70px;
-    border-radius: 20px;
+    border-radius: 5px;
     visibility: hidden;
     text-align: center;
     vertical-align: middle;
     line-height: 70px;
 }
 #changeButton {
-    left: 40%;
+    left: 50%;
     bottom: -100%;
+    margin-bottom: 5px;
 }
 
 #vk-share-button {
     position: absolute;
     left: 80%;
     bottom: -100%;
+    margin-bottom: 40px;
 }
 
 

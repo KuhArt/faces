@@ -2,6 +2,7 @@
  * Created by artkuh on 31.8.15.
  */
 var elements = require('./DOMElements.js');
+var imagesContainer = require('./imageContainer.js')
 var
     slider = {},
     onSlideAfter = function (bodyPart) {
@@ -27,7 +28,6 @@ var
 
             imagesContainer.setActivePart(bodyPart.type, index);
             elements.$demo.append('<div class = \"' + bodyPart.type + '\"><img src=\"' + bodyPart.bodyParts[index] + '\"> </div>');
-            console.log('demo.length:', elements.$demo.find('div').length, 'container size:', imagesContainer.size() + 1)
             if (elements.$demo.find('div').length == imagesContainer.size() + 1) {
                 elements.$endButton.css({"visibility": "visible"});
             }
